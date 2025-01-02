@@ -45,6 +45,6 @@ jobs:
       - name: Delete old container
         run: docker rm -f spring-petclinic-container
       - name: Run docker comtainer
-        run: docker run -d -p 8080:8080 --name muskan04yadav/spring-petclinic-container muskan04yadav/spring-petclinic:latest
+        run: docker run -d -p 8080:8080 --name spring-petclinic-container muskan04yadav/spring-petclinic:latest
 
 
