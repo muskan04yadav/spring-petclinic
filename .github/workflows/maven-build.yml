@@ -41,7 +41,7 @@ jobs:
     runs-on: [aws-ec2]
     steps:
       - name: pull image from docker hub
-        run: docker pull muskan04yadav/muskan04yadav/spring-petclinic:latest
+        run: docker pull muskan04yadav/spring-petclinic:latest
       - name: Delete old container
         run: docker rm -f spring-petclinic-container
       - name: Run docker comtainer
