@@ -1,29 +1,50 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Java CI with Maven
+name: Deploy on AWS EC2
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main 
+ 
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        java: [ '17' ]
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK ${{matrix.java}}
-        uses: actions/setup-java@v4
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
         with:
-          java-version: ${{matrix.java}}
-          distribution: 'adopt'
-          cache: maven
-      - name: Build with Maven Wrapper
-        run: ./mvnw -B package
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Maven
+        run: mvn clean install
+
+      - name: login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME}} -p ${{ secrets.DOCKER_PASSWORD}}
+
+      - name: Build Docker Image
+        run: docker build -t muskan04yadav/spring-petclinic .
+
+      - name: Publish the docker image
+        run: docker push muskan04yadav/spring-petclinic:latest 
+
+  deploy: 
+    needs: build
+    runs-on: [aws-ec2]
+    steps:
+      - name: pull image from docker hub
+        run: docker pull muskan04yadav/muskan04yadav/spring-petclinic:latest
+      - name: Delete old container
+        run: docker rm -f spring-petclinic-container
+      - name: Run docker comtainer
+        run: docker run -d -p 8080:8080 --name muskan04yadav/spring-petclinic-container muskan04yadav/spring-petclinic:latest
+
+
