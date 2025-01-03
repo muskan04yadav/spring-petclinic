@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    uses: muskan04yadav/shared-workflow/.github/workflows/spring_build_deploy.yml@spring_main
+    uses: muskan04yadav/spring_shared_workflow/.github/workflows/resuable.yml@main
     with:
         image_name: muskan04yadav/spring-petclinic:latest
     secrets:
