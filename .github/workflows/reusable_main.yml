@@ -1,0 +1,12 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - reusable
+
+jobs:
+  build-and-deploy:
+    uses: muskan04yadav/shared-workflow/.github/workflows/spring_build_deploy.yml@spring_main
+    with:
+        image_name: muskan04yadav/spring-petclinic:latest
