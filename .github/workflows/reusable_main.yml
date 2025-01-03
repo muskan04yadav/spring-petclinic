@@ -10,3 +10,6 @@ jobs:
     uses: muskan04yadav/shared-workflow/.github/workflows/spring_build_deploy.yml@spring_main
     with:
         image_name: muskan04yadav/spring-petclinic:latest
+    secrets:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME}}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD}}
