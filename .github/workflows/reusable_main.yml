@@ -10,6 +10,6 @@ jobs:
     uses: muskan04yadav/spring_shared_workflow/.github/workflows/resuable.yml@main
     with:
         image_name: muskan04yadav/spring-petclinic:latest
-    secrets:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME}}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD}}
+    secrets: inherit
+        # docker_username: ${{ secrets.DOCKER_USERNAME}}
+        # docker_password: ${{ secrets.DOCKER_PASSWORD}}
