@@ -11,6 +11,8 @@ jobs:
     with:
         image_name: muskan04yadav/spring-petclinic:latest
         container_name: spring-petclinic-container
+        repository_name: spring-petclinic
+        tag: latest
     secrets:
         docker_username: ${{ secrets.DOCKER_USERNAME}}
         docker_password: ${{ secrets.DOCKER_PASSWORD}}
